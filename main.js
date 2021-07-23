@@ -6,7 +6,7 @@ window.onload = function(){
     }
     function toggleClick(){
         const modeToggleChk = document.querySelector('.switch-input').checked;
-        if( modeToggleChk ){
+        if( !modeToggleChk ){
             modeToggle.setAttribute('data-on-off', 'on');
             cardWrap.classList.remove('light');
             cardWrap.classList.add('dark');
