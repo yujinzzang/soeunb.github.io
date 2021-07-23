@@ -7,8 +7,7 @@
   }
   
   .container {
-    margin: 100px auto;
-    width: 809px;
+    width: 100%;
   }
   
   .light {
@@ -17,11 +16,12 @@
   
   .calendar {
     width: 370px;
+    margin: 0 auto;
     box-shadow: 0px 0px 35px -16px rgba(0, 0, 0, 0.75);
     font-family: "Roboto", sans-serif;
     padding: 20px 30px;
     color: #363b41;
-    display: inline-block;
+    display: block;
   }
   
   .calendar_header {
