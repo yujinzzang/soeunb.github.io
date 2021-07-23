@@ -5,11 +5,12 @@ window.onload = function(){
         modeToggle.addEventListener("click", toggleClick);
     }
     function toggleClick(){
-        if( cardWrap.className === 'calendar light' ){
-            cardWrap.classList.replace('light', 'dark');
+        if( modeToggle.getAttribute('data-on-off') === 'off' ){
+            cardWrap.classList.remove('light');
+            cardWrap.classList.add('dark');
         }else{
-            cardWrap.classList.replace('dark', 'light');
+            cardWrap.classList.remove('dark');
+            cardWrap.classList.add('light');
         }
-        console.log('aa');
     }
 }
