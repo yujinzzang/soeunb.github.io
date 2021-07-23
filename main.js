@@ -5,7 +5,8 @@ window.onload = function(){
         modeToggle.addEventListener("click", toggleClick);
     }
     function toggleClick(){
-        if( modeToggle.getAttribute('data-on-off') === 'off' ){
+        const modeToggleChk = modeToggle.checked;
+        if( modeToggleChk ){
             modeToggle.setAttribute('data-on-off', 'on');
             cardWrap.classList.remove('light');
             cardWrap.classList.add('dark');
