@@ -7,17 +7,27 @@
     <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
 </head>
 <body>
-    <!-- Copyright (c) 2021 by BradleyPJ (https://codepen.io/BradleyPJ/pen/LmpzNx) -->
+    <!--
+    Copyright (c) 2021 by BradleyPJ (https://codepen.io/BradleyPJ/pen/LmpzNx)
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+    The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    -->
     <div class="container">
-        <div class="calendar light">
-          <!-- Copyright (c) 2021 by Thom Nichols (https://codepen.io/thom-nic/pen/BNLdyY) -->
+        <div class="calendar main light">
+          <!--
+          Copyright (c) 2021 by Thom Nichols (https://codepen.io/thom-nic/pen/BNLdyY)
+          Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+          The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+          THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+          -->
           <label class="switch">
             <input type="checkbox" class="switch-input">
             <span class="switch-label" data-on-off="off"></span>
             <span class="switch-handle"></span>
           </label>
           <div class="calendar_header">
-            <h1 class="header_title">타이틀 뭐라고 하지</h1>
+            <h3 class="header_title">타이틀 뭐라고 하지</h3>
             <p class="header_copy">여긴 뭐라고 할까</p>
           </div>
           <div class="calendar_plan">
@@ -43,37 +53,29 @@
             </div>
           </div>
         </div>
-      <br/><br/><br/><br/><br/><br/>
-      <!--
-      <div class="calendar dark">
+
+        <div class="calendar add light" style="display: none;">
+          <span class="close_btn">X</span>
           <div class="calendar_header">
-            <h1 class="header_title">다크모드</h1>
-            <p class="header_copy">블핑</p>
-          </div>
-          <div class="calendar_plan">
-            <div class="cl_plan">
-              <div class="cl_title">총 자산</div>
-              <div class="cl_copy">{{totalPrice}}</div>
-              <div class="cl_add">
-                <i class="fas fa-plus"></i>
-              </div>
-            </div>
+            <h3 class="header_title">얼마나 샀나용</h3>
+            <!-- <p class="header_copy">주식 수 입력</p> -->
           </div>
           <div class="calendar_events">
-            <p class="ce_title">최근 항목  TO-BE: 필터기능(전체보기/항목별보기)</p>
-            <div class="event_item">
-              <div class="ei_Dot dot_active"></div>
-              <div class="ei_Title">{{inputDate}}</div>
-              <div class="ei_Copy">{{stockName}}} - {{stockQuantity}}주 (총 {{stockTotalPrice}}원)</div>
+            <div class="add_item stock_name_wrap">
+              <label>종목명</label>
+              <input id="stock_name" class="stock_name">
             </div>
-            <div class="event_item">
-              <div class="ei_Dot"></div>
-              <div class="ei_Title">2021-07-22 12:00 pm</div>
-              <div class="ei_Copy">삼성전자 - 10주 (총 800,000원)</div>
+            <div class="add_item stock_quantity">
+              <label>수량</label>
+              <input id="stock_quantity" class="stock_quantity">
+            </div>
+            <div class="add_item stock_price">
+              <label>가격</label>
+              <input id="stock_price" class="stock_price">
             </div>
           </div>
+          <div class="apply_btn">완료</div>
         </div>
-      -->
       </div>
       
     <!-- 회원가입 이메일/카톡/네이버 연동 전까지는 session storage 보관 -->
