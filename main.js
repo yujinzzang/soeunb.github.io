@@ -44,4 +44,5 @@ window.onload = function(){
             addCard.style.display = 'block';
         }
     }
+    console.log("test");
 }
