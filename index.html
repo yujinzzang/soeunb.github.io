@@ -41,15 +41,19 @@
           </div>
           <div class="calendar_events">
             <p class="ce_title">최근 항목  TO-BE: 필터기능(전체보기/항목별보기)</p>
-            <div class="event_item">
-              <div class="ei_Dot dot_active"></div>
-              <div class="ei_Title">{{inputDate}}</div>
-              <div class="ei_Copy">{{stockName}}} - {{stockQuantity}}주 (총 {{stockTotalPrice}}원)</div>
-            </div>
-            <div class="event_item">
-              <div class="ei_Dot"></div>
-              <div class="ei_Title">2021-07-22 12:00 pm</div>
-              <div class="ei_Copy">삼성전자 - 10주 (총 800,000원)</div>
+            <div class="event_item_wrap">
+              <!--
+              <div class="event_item">
+                <div class="ei_Dot dot_active"></div>
+                <div class="ei_Title">{{inputDate}}</div>
+                <div class="ei_Copy">{{stockName}}} - {{stockQuantity}}주 (총 {{stockTotalPrice}}원)</div>
+              </div>
+              <div class="event_item">
+                <div class="ei_Dot"></div>
+                <div class="ei_Title">2021-07-22 12:00 pm</div>
+                <div class="ei_Copy">삼성전자 - 10주 (총 800,000원)</div>
+              </div>
+            -->
             </div>
           </div>
         </div>
@@ -74,7 +78,7 @@
             <!-- <p class="header_copy">주식 수 입력</p> -->
           </div>
           <div class="calendar_events">
-            <div class="add_item add_name_wrap">
+            <div class="add_item add_date_wrap">
               <label for="add_date">날짜 <span class="required">*</span></label>
               <input id="add_date" class="add_date" type="date" value="" max="">
             </div>

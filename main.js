@@ -27,6 +27,23 @@ window.onload = function(){
     const applyBtn = document.querySelector('.apply_btn');
     applyBtn.addEventListener('click', function(){
         if( addValidChk() ){
+            const addPrice = addQuantityInput.value * addPriceInput.value;
+            let timeLineHtml = '';
+            timeLineHtml += '<div class="event_item">';
+            timeLineHtml += '   <div class="ei_Dot"></div>';
+            timeLineHtml += '   <div class="ei_Title">' + addDateInput.value + '</div>';
+            timeLineHtml += '   <div class="ei_Copy">';
+            timeLineHtml +=         addNameInput.value + ' (' + addPriceInput.value + '원) - ' + addQuantityInput.value + '주 ';
+            timeLineHtml += '   </div>';
+            timeLineHtml += '   <div class="ei_Copy">' + '총 ' + addPrice + '원</div>';
+            timeLineHtml += '</div>';
+
+            if( mainCard.querySelectorAll('.event_item_wrap .event_item').length === 0 ){
+                mainCard.querySelector('.event_item_wrap').innerHTML = timeLineHtml;
+            }else{
+                mainCard.querySelector('.event_item_wrap .event_item').insertAdjacentHTML('beforebegin', timeLineHtml);
+            }
+
             displayCard('main');
         }
     }, false);
@@ -59,8 +76,8 @@ window.onload = function(){
                 addCard.classList.add('light');
                 addCard.classList.remove('dark');
             }
-            mainCard.style.display = 'none';
             addCard.style.display = 'block';
+            mainCard.style.display = 'none';
         }
     }
 
