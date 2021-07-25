@@ -44,5 +44,16 @@ window.onload = function(){
             addCard.style.display = 'block';
         }
     }
-    console.log("test");
+
+    const inputNumberList = document.querySelectorAll('input.num');
+    for( const inputNumber of inputNumberList ){
+        inputNumber.addEventListener('keyup', function(){
+            regNumber = /^[0-9]*$/;
+            var str = this.value;
+            if(!regNumber.test(str)) {
+                var res = str.substring(0, str.length-1);
+                this.value = res; 
+            }
+        });
+    }
 }

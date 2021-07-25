@@ -57,20 +57,37 @@
         <div class="calendar add light" style="display: none;">
           <span class="close_btn">X</span>
           <div class="calendar_header">
-            <h3 class="header_title">얼마나 샀나용</h3>
+            <div class="stock_type_wrap">
+              <label>
+                <input type="radio" name="radio" checked>
+                <div class="buy box">
+                  <span>매수</span>
+                </div>
+              </label>
+              <label>
+                <input type="radio" name="radio">
+                <div class="sell box">
+                  <span>매도</span>
+                </div>
+              </label>
+            </div>
             <!-- <p class="header_copy">주식 수 입력</p> -->
           </div>
           <div class="calendar_events">
             <div class="add_item stock_name_wrap">
-              <label>종목명</label>
+              <label>종목명 <span class="required">*</span></label>
               <input id="stock_name" class="stock_name">
             </div>
             <div class="add_item stock_quantity">
-              <label>수량</label>
-              <input id="stock_quantity" class="stock_quantity">
+              <label>수량 <span class="required">*</span></label>
+              <input id="stock_quantity"  class="stock_quantity num">
             </div>
             <div class="add_item stock_price">
-              <label>가격</label>
+              <label>가격 <span class="required">*</span></label>
+              <input id="stock_price" class="stock_price num">
+            </div>
+            <div class="add_item stock_price">
+              <label>메모</label>
               <input id="stock_price" class="stock_price">
             </div>
           </div>

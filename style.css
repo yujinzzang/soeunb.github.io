@@ -28,6 +28,10 @@
     padding-top: inherit;
     border-bottom: 2px solid rgba(0, 0, 0, 0.08);
   }
+
+  .calendar.add .calendar_header {
+    padding-top: inherit;
+  }
   
   .header_copy {
     color: #a39d9e;
@@ -149,6 +153,58 @@
     color: #303030;
     line-height: 2rem;
     font-size: 12px;
+  }
+
+  .required {
+    color: #ff8494;
+    margin-left: 3px;
+  }
+
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="radio"] {   
+    display: none;
+  }
+
+  .stock_type_wrap {
+    text-align: center;
+  }
+
+  .stock_type_wrap .box {
+    width: 140px;
+    height: 50px;
+    background-color: #fff;
+    transition: all 250ms ease;
+    will-change: transition;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    font-family: "Dax", sans-serif;
+    font-weight: 900;
+  }
+
+  .stock_type_wrap input[type=radio]:checked + .box {
+    background-color: #ff8494;
+  }
+
+  .stock_type_wrap .box span {
+    position: absolute;
+    transform: translate(0, 14px);
+    left: 0;
+    right: 0;
+    transition: all 300ms ease;
+    font-size: 1em;
+    color: #ff8494;
+  }
+
+  .stock_type_wrap input[type=radio]:checked + .box span {
+    color: white;
+    transform: translateY(14px);
   }
 
   .apply_btn {
