@@ -31,6 +31,7 @@
 
   .calendar.add .calendar_header {
     padding-top: inherit;
+    border-bottom: 0;
   }
   
   .header_copy {
