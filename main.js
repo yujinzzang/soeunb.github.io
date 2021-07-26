@@ -27,13 +27,21 @@ window.onload = function(){
     const applyBtn = document.querySelector('.apply_btn');
     applyBtn.addEventListener('click', function(){
         if( addValidChk() ){
-            const addPrice = addQuantityInput.value * addPriceInput.value;
+            const addType = document.querySelector('.add_type_wrap input:checked').getAttribute('data-add-type');
+            let dotTypeClass = '';
+            if( addType === 'buy'){
+            dotTypeClass = 'dot_buy';
+            }else{
+            dotTypeClass = 'dot_sell';
+            }
+
+            const addPrice = priceFormat(addQuantityInput.value * addPriceInput.value);
             let timeLineHtml = '';
             timeLineHtml += '<div class="event_item">';
-            timeLineHtml += '   <div class="ei_Dot"></div>';
+            timeLineHtml += '   <div class="ei_Dot ' + dotTypeClass + '"></div>';
             timeLineHtml += '   <div class="ei_Title">' + addDateInput.value + '</div>';
             timeLineHtml += '   <div class="ei_Copy">';
-            timeLineHtml +=         addNameInput.value + ' (' + addPriceInput.value + '원) - ' + addQuantityInput.value + '주 ';
+            timeLineHtml +=         addNameInput.value + ' (' + priceFormat(addPriceInput.value) + '원) - ' + addQuantityInput.value + '주 ';
             timeLineHtml += '   </div>';
             timeLineHtml += '   <div class="ei_Copy">' + '총 ' + addPrice + '원</div>';
             timeLineHtml += '</div>';
@@ -64,6 +72,7 @@ window.onload = function(){
             mainCard.style.display = 'block';
             addCard.style.display = 'none';
         }else if( type === 'add' ){
+            document.querySelector('.add_type_wrap input:checked').getAttribute('data-add-type');
             addDateInput.value = curYear + '-' + curMonth + '-' + curDate;
             addNameInput.value = '';
             addQuantityInput.value = '';
@@ -128,5 +137,9 @@ window.onload = function(){
             addPriceInput.parentNode.classList.remove('error');
             return true;
         }
+    }
+
+    function priceFormat( str ){
+        return Number(str).toLocaleString();
     }
 }

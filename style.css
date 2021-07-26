@@ -110,8 +110,12 @@
     box-shadow: 0px 0px 52px -18px rgba(0, 0, 0, 0.75);
   }
   
-  .dot_active {
-    background-color: #ff8494;
+  .dot_buy {
+    background-color: #ff465e;
+  }
+  
+  .dot_sell {
+    background-color: #8493ff;
   }
   
   .ei_Title {
