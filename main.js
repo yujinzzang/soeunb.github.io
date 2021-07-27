@@ -14,6 +14,9 @@ window.onload = function(){
         modeToggle.addEventListener('click', toggleClick);
     }
 
+    var stockList = localStorage.getItem('stockInfo');
+    gridTimeLine('main', JSON.parse(stockList));
+
     const addBtn = document.querySelector('.cl_add');
     addBtn.addEventListener('click', function(){
         displayCard('add');
@@ -27,31 +30,7 @@ window.onload = function(){
     const applyBtn = document.querySelector('.apply_btn');
     applyBtn.addEventListener('click', function(){
         if( addValidChk() ){
-            const addType = document.querySelector('.add_type_wrap input:checked').getAttribute('data-add-type');
-            let dotTypeClass = '';
-            if( addType === 'buy'){
-            dotTypeClass = 'dot_buy';
-            }else{
-            dotTypeClass = 'dot_sell';
-            }
-
-            const addPrice = priceFormat(addQuantityInput.value * addPriceInput.value);
-            let timeLineHtml = '';
-            timeLineHtml += '<div class="event_item">';
-            timeLineHtml += '   <div class="ei_Dot ' + dotTypeClass + '"></div>';
-            timeLineHtml += '   <div class="ei_Title">' + addDateInput.value + '</div>';
-            timeLineHtml += '   <div class="ei_Copy">';
-            timeLineHtml +=         addNameInput.value + ' (' + priceFormat(addPriceInput.value) + '원) - ' + addQuantityInput.value + '주 ';
-            timeLineHtml += '   </div>';
-            timeLineHtml += '   <div class="ei_Copy">' + '총 ' + addPrice + '원</div>';
-            timeLineHtml += '</div>';
-
-            if( mainCard.querySelectorAll('.event_item_wrap .event_item').length === 0 ){
-                mainCard.querySelector('.event_item_wrap').innerHTML = timeLineHtml;
-            }else{
-                mainCard.querySelector('.event_item_wrap .event_item').insertAdjacentHTML('beforebegin', timeLineHtml);
-            }
-
+            gridTimeLine('add');
             displayCard('main');
         }
     }, false);
@@ -87,6 +66,74 @@ window.onload = function(){
             }
             addCard.style.display = 'block';
             mainCard.style.display = 'none';
+        }
+    }
+
+    function gridTimeLine(type, info){
+        if(type === 'add'){
+            let cnt = 0;
+
+            const addType = document.querySelector('.add_type_wrap input:checked').getAttribute('data-add-type');
+            let dotTypeClass = '';
+            if( addType === 'buy'){
+            dotTypeClass = 'dot_buy';
+            }else{
+            dotTypeClass = 'dot_sell';
+            }
+
+            const addPrice = priceFormat(addQuantityInput.value * addPriceInput.value);
+            let timeLineHtml = '';
+            timeLineHtml += '<div class="event_item">';
+            timeLineHtml += '   <div class="ei_Dot ' + dotTypeClass + '"></div>';
+            timeLineHtml += '   <div class="ei_Title">' + addDateInput.value + '</div>';
+            timeLineHtml += '   <div class="ei_Copy">';
+            timeLineHtml +=         addNameInput.value + ' (' + priceFormat(addPriceInput.value) + '원) - ' + addQuantityInput.value + '주 ';
+            timeLineHtml += '   </div>';
+            timeLineHtml += '   <div class="ei_Copy">' + '총 ' + addPrice + '원</div>';
+            timeLineHtml += '</div>';
+
+            if( mainCard.querySelectorAll('.event_item_wrap .event_item').length === 0 ){
+                mainCard.querySelector('.event_item_wrap').innerHTML = timeLineHtml;
+                cnt = 1;
+            }else{
+                mainCard.querySelector('.event_item_wrap .event_item').insertAdjacentHTML('beforebegin', timeLineHtml);
+                cnt = mainCard.querySelectorAll('.event_item_wrap .event_item').length;
+            }
+
+            const setStockInfo = { 'num': cnt, 'addType': addType, 'dotTypeClass': dotTypeClass, 'addDateInput': addDateInput.value, 
+                                'addNameInput': addNameInput.value, 'addPriceInput': addPriceInput.value, 'addQuantityInput': addQuantityInput.value, 'addPrice': addPrice };
+            const getStockInfo = localStorage.getItem('stockInfo');
+            if( getStockInfo !== null ){
+                let tempArr = JSON.parse(getStockInfo);
+                if( tempArr.length === undefined ){
+                    tempArr = [JSON.parse(getStockInfo)];
+                }
+                tempArr.push(setStockInfo);
+                localStorage.setItem('stockInfo', JSON.stringify(tempArr));
+            }else{
+                localStorage.setItem('stockInfo', JSON.stringify(setStockInfo));
+            }
+            
+        }else{
+            if( info ){
+                info = info.reverse();
+                let timeLineHtml = '';
+                for( let i=0; i<info.length; i++ ){
+                    timeLineHtml += '<div class="event_item">';
+                    timeLineHtml += '   <div class="ei_Dot ' + info[i].dotTypeClass + '"></div>';
+                    timeLineHtml += '   <div class="ei_Title">' + info[i].addDateInput + '</div>';
+                    timeLineHtml += '   <div class="ei_Copy">';
+                    timeLineHtml +=         info[i].addNameInput + ' (' + priceFormat(info[i].addPriceInput) + '원) - ' + info[i].addQuantityInput + '주 ';
+                    timeLineHtml += '   </div>';
+                    timeLineHtml += '   <div class="ei_Copy">' + '총 ' + info[i].addPrice + '원</div>';
+                    timeLineHtml += '</div>';
+                }
+                if( mainCard.querySelectorAll('.event_item_wrap .event_item').length === 0 ){
+                    mainCard.querySelector('.event_item_wrap').innerHTML = timeLineHtml;
+                }else{
+                    mainCard.querySelector('.event_item_wrap .event_item').insertAdjacentHTML('beforebegin', timeLineHtml);
+                }
+            }
         }
     }
 
