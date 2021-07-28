@@ -3,6 +3,8 @@ window.onload = function(){
     const mainCard = document.querySelector('.calendar.main');
     const addCard = document.querySelector('.calendar.add');
 
+    const totalPrice = document.querySelector('.calendar_plan .cl_copy');
+    
     const addDateInput = document.querySelector('.calendar.add .add_date');
     const addNameInput = document.querySelector('.calendar.add .add_name');
     const addQuantityInput = document.querySelector('.calendar.add .add_quantity');
@@ -14,7 +16,11 @@ window.onload = function(){
         modeToggle.addEventListener('click', toggleClick);
     }
 
-    var stockList = localStorage.getItem('stockInfo');
+    if( localStorage.getItem('totalPrice') === null ){
+       localStorage.setItem('totalPrice', 0);
+    }
+
+    const stockList = localStorage.getItem('stockInfo');
     gridTimeLine('main', JSON.parse(stockList));
 
     const addBtn = document.querySelector('.cl_add');
@@ -51,7 +57,7 @@ window.onload = function(){
             mainCard.style.display = 'block';
             addCard.style.display = 'none';
         }else if( type === 'add' ){
-            document.querySelector('.add_type_wrap input:checked').getAttribute('data-add-type');
+            document.querySelectorAll('.add_type_wrap input')[0].checked = true;
             addDateInput.value = curYear + '-' + curMonth + '-' + curDate;
             addNameInput.value = '';
             addQuantityInput.value = '';
@@ -73,23 +79,37 @@ window.onload = function(){
         if(type === 'add'){
             let cnt = 0;
 
+            const addPrice = addQuantityInput.value * addPriceInput.value;
+            const addPriceFormat = priceFormat(addQuantityInput.value * addPriceInput.value);
+            if( totalPrice.getAttribute('data-total-price') === null ){
+                totalPrice.setAttribute('data-total-price', 0);
+            }
+
             const addType = document.querySelector('.add_type_wrap input:checked').getAttribute('data-add-type');
             let dotTypeClass = '';
             if( addType === 'buy'){
-            dotTypeClass = 'dot_buy';
+                dotTypeClass = 'dot_buy';
+                addTypeText = '매수';
+                totalPrice.textContent = priceFormat(Number(localStorage.getItem('totalPrice')) + addPrice) + '원';
+                totalPrice.setAttribute('data-total-price', Number(localStorage.getItem('totalPrice')) + addPrice);
             }else{
-            dotTypeClass = 'dot_sell';
+                dotTypeClass = 'dot_sell';
+                addTypeText = '매도';
+                totalPrice.textContent = priceFormat(Number(localStorage.getItem('totalPrice')) - addPrice) + '원';
+                totalPrice.setAttribute('data-total-price', Number(localStorage.getItem('totalPrice')) - addPrice);
             }
+            
+            localStorage.setItem('totalPrice', totalPrice.getAttribute('data-total-price'));
 
-            const addPrice = priceFormat(addQuantityInput.value * addPriceInput.value);
             let timeLineHtml = '';
             timeLineHtml += '<div class="event_item">';
             timeLineHtml += '   <div class="ei_Dot ' + dotTypeClass + '"></div>';
+            timeLineHtml += '   <i class="fas fa-ellipsis-v menu_btn"></i>';
             timeLineHtml += '   <div class="ei_Title">' + addDateInput.value + '</div>';
             timeLineHtml += '   <div class="ei_Copy">';
-            timeLineHtml +=         addNameInput.value + ' (' + priceFormat(addPriceInput.value) + '원) - ' + addQuantityInput.value + '주 ';
+            timeLineHtml +=         addNameInput.value + ' (' + priceFormat(addPriceInput.value) + '원) - ' + addQuantityInput.value + '주 ' + addTypeText;
             timeLineHtml += '   </div>';
-            timeLineHtml += '   <div class="ei_Copy">' + '총 ' + addPrice + '원</div>';
+            timeLineHtml += '   <div class="ei_Copy">' + '총 ' + addPriceFormat + '원</div>';
             timeLineHtml += '</div>';
 
             if( mainCard.querySelectorAll('.event_item_wrap .event_item').length === 0 ){
@@ -100,12 +120,12 @@ window.onload = function(){
                 cnt = mainCard.querySelectorAll('.event_item_wrap .event_item').length;
             }
 
-            const setStockInfo = { 'num': cnt, 'addType': addType, 'dotTypeClass': dotTypeClass, 'addDateInput': addDateInput.value, 
+            const setStockInfo = { 'num': cnt, 'addType': addType, 'dotTypeClass': dotTypeClass, 'addDateInput': addDateInput.value, 'addMemoInput': addMemoInput.value, 'addTypeText': addTypeText,
                                 'addNameInput': addNameInput.value, 'addPriceInput': addPriceInput.value, 'addQuantityInput': addQuantityInput.value, 'addPrice': addPrice };
             const getStockInfo = localStorage.getItem('stockInfo');
             if( getStockInfo !== null ){
                 let tempArr = JSON.parse(getStockInfo);
-                if( tempArr.length === undefined ){
+                if( !Array.isArray(tempArr) ){
                     tempArr = [JSON.parse(getStockInfo)];
                 }
                 tempArr.push(setStockInfo);
@@ -115,19 +135,27 @@ window.onload = function(){
             }
             
         }else{
+            totalPrice.textContent = '0 원';
             if( info ){
-                info = info.reverse();
+                if( Array.isArray(info) ){
+                    info = info.reverse();
+                }else{
+                    info = [info];
+                }
                 let timeLineHtml = '';
                 for( let i=0; i<info.length; i++ ){
                     timeLineHtml += '<div class="event_item">';
                     timeLineHtml += '   <div class="ei_Dot ' + info[i].dotTypeClass + '"></div>';
+                    timeLineHtml += '   <i class="fas fa-ellipsis-v menu_btn"></i>';
                     timeLineHtml += '   <div class="ei_Title">' + info[i].addDateInput + '</div>';
                     timeLineHtml += '   <div class="ei_Copy">';
-                    timeLineHtml +=         info[i].addNameInput + ' (' + priceFormat(info[i].addPriceInput) + '원) - ' + info[i].addQuantityInput + '주 ';
+                    timeLineHtml +=         info[i].addNameInput + ' (' + priceFormat(info[i].addPriceInput) + '원) - ' + info[i].addQuantityInput + '주 ' + info[i].addTypeText;
                     timeLineHtml += '   </div>';
-                    timeLineHtml += '   <div class="ei_Copy">' + '총 ' + info[i].addPrice + '원</div>';
+                    timeLineHtml += '   <div class="ei_Copy">' + '총 ' + priceFormat(info[i].addPrice) + '원</div>';
                     timeLineHtml += '</div>';
                 }
+                totalPrice.textContent = priceFormat(totalPrice.getAttribute('data-total-price')) + '원';
+
                 if( mainCard.querySelectorAll('.event_item_wrap .event_item').length === 0 ){
                     mainCard.querySelector('.event_item_wrap').innerHTML = timeLineHtml;
                 }else{

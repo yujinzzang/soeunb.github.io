@@ -5,6 +5,7 @@
     <meta name='viewport' content='width=device-width'>
     <title>Stock Diary</title>
     <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 </head>
 <body>
     <!--
@@ -27,13 +28,13 @@
             <span class="switch-handle"></span>
           </label>
           <div class="calendar_header">
-            <h3 class="header_title">타이틀 뭐라고 하지</h3>
-            <p class="header_copy">여긴 뭐라고 할까</p>
+            <!-- <h4 class="header_title">소은님, 안녕하세요</h4> -->
+            <p class="header_copy">소은님, 안녕하세요</p>
           </div>
           <div class="calendar_plan">
             <div class="cl_plan">
               <div class="cl_title">총 자산</div>
-              <div class="cl_copy">{{totalPrice}}}</div>
+              <div class="cl_copy"></div>
               <div class="cl_add">
                 <i class="fas fa-plus"></i>
               </div>
@@ -42,28 +43,16 @@
           <div class="calendar_events">
             <p class="ce_title">최근 항목  TO-BE: 필터기능(전체보기/항목별보기)</p>
             <div class="event_item_wrap">
-              <!--
-              <div class="event_item">
-                <div class="ei_Dot dot_active"></div>
-                <div class="ei_Title">{{inputDate}}</div>
-                <div class="ei_Copy">{{stockName}}} - {{stockQuantity}}주 (총 {{stockTotalPrice}}원)</div>
-              </div>
-              <div class="event_item">
-                <div class="ei_Dot"></div>
-                <div class="ei_Title">2021-07-22 12:00 pm</div>
-                <div class="ei_Copy">삼성전자 - 10주 (총 800,000원)</div>
-              </div>
-            -->
             </div>
           </div>
         </div>
 
         <div class="calendar add" style="display: none;">
-          <span class="close_btn">X</span>
+          <span class="far fa-times-circle fa-lg close_btn"></span>
           <div class="calendar_header">
             <div class="add_type_wrap">
               <label>
-                <input type="radio" name="radio" data-add-type="buy" checked>
+                <input type="radio" name="radio" data-add-type="buy">
                 <div class="buy box">
                   <span>매수</span>
                 </div>
@@ -75,7 +64,6 @@
                 </div>
               </label>
             </div>
-            <!-- <p class="header_copy">주식 수 입력</p> -->
           </div>
           <div class="calendar_events">
             <div class="add_item add_date_wrap">
@@ -103,19 +91,7 @@
         </div>
       </div>
       
-    <!-- 회원가입 이메일/카톡/네이버 연동 전까지는 session storage 보관 -->
-    <!-- 0720 html구조 0721 git연동+html구조 -->
-    <!-- TODO: 매수하셨나여 매도하셨나여 radio button 선택 후 카드넘기기 샥 -->
-    <!-- 
-    <input type='radio' name='stockType' value='buy'>매수</input>
-    <input type='radio' name='stockType' value='sell'>매도</input>
-    <br/><br/> 
-    <label for='qantity'>수량</label>
-    <input id='quantity' type='number'>
-    <br/><br/> 
-    <label for='price'>가격</label>
-    <input id='price' type='number'>
-    -->
+    <!-- 회원가입 이메일/카톡/네이버 연동 전까지는 local storage 보관 -->
     <script src='main.js'></script>
 </body>
 </html>
