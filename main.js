@@ -28,6 +28,11 @@ window.onload = function(){
         displayCard('add');
     }, false);
     
+    const deleteBtn = document.querySelector('.delete_btn');
+    deleteBtn.addEventListener('click', function(){
+        
+    }, false);
+
     const closeBtn = document.querySelector('.close_btn');
     closeBtn.addEventListener('click', function(){
         displayCard('main');
@@ -76,6 +81,15 @@ window.onload = function(){
     }
 
     function gridTimeLine(type, info){
+        let menuHtml = '';
+        menuHtml += '<div class="menuBox">';
+        menuHtml += '    <ul>';
+        menuHtml += '        <li><i class="far fa-edit edit_btn"></i></li>';
+        menuHtml += '        <li><i class="far fa-trash-alt delete_btn"></i></li>';
+        menuHtml += '    </ul>';
+        menuHtml += '   <div class="arrow-up"></div>';
+        menuHtml += '</div>';
+
         if(type === 'add'){
             let cnt = 0;
 
@@ -104,7 +118,8 @@ window.onload = function(){
             let timeLineHtml = '';
             timeLineHtml += '<div class="event_item">';
             timeLineHtml += '   <div class="ei_Dot ' + dotTypeClass + '"></div>';
-            timeLineHtml += '   <i class="fas fa-ellipsis-v menu_btn"></i>';
+            timeLineHtml += '   <i class="fas fa-tools menu_btn"></i>';
+            timeLineHtml +=     menuHtml;
             timeLineHtml += '   <div class="ei_Title">' + addDateInput.value + '</div>';
             timeLineHtml += '   <div class="ei_Copy">';
             timeLineHtml +=         addNameInput.value + ' (' + priceFormat(addPriceInput.value) + '원) - ' + addQuantityInput.value + '주 ' + addTypeText;
@@ -119,6 +134,7 @@ window.onload = function(){
                 mainCard.querySelector('.event_item_wrap .event_item').insertAdjacentHTML('beforebegin', timeLineHtml);
                 cnt = mainCard.querySelectorAll('.event_item_wrap .event_item').length;
             }
+            document.querySelector('.event_item').setAttribute('data-idx', cnt);
 
             const setStockInfo = { 'num': cnt, 'addType': addType, 'dotTypeClass': dotTypeClass, 'addDateInput': addDateInput.value, 'addMemoInput': addMemoInput.value, 'addTypeText': addTypeText,
                                 'addNameInput': addNameInput.value, 'addPriceInput': addPriceInput.value, 'addQuantityInput': addQuantityInput.value, 'addPrice': addPrice };
@@ -144,9 +160,10 @@ window.onload = function(){
                 }
                 let timeLineHtml = '';
                 for( let i=0; i<info.length; i++ ){
-                    timeLineHtml += '<div class="event_item">';
+                    timeLineHtml += '<div class="event_item" data-idx="' + info[i].num + '">';
                     timeLineHtml += '   <div class="ei_Dot ' + info[i].dotTypeClass + '"></div>';
-                    timeLineHtml += '   <i class="fas fa-ellipsis-v menu_btn"></i>';
+                    timeLineHtml += '   <i class="fas fa-cog menu_btn"></i>';
+                    timeLineHtml +=     menuHtml;
                     timeLineHtml += '   <div class="ei_Title">' + info[i].addDateInput + '</div>';
                     timeLineHtml += '   <div class="ei_Copy">';
                     timeLineHtml +=         info[i].addNameInput + ' (' + priceFormat(info[i].addPriceInput) + '원) - ' + info[i].addQuantityInput + '주 ' + info[i].addTypeText;
