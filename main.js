@@ -120,7 +120,7 @@ window.onload = function(){
             let timeLineHtml = '';
             timeLineHtml += '<div class="event_item">';
             timeLineHtml += '   <div class="ei_Dot ' + dotTypeClass + '"></div>';
-            timeLineHtml += '   <i class="fas fa-tools menu_btn"></i>';
+            timeLineHtml += '   <i class="fas fa-cog menu_btn"></i>';
             timeLineHtml +=     menuHtml;
             timeLineHtml += '   <div class="ei_Title">' + addDateInput.value + '</div>';
             timeLineHtml += '   <div class="ei_Copy">';
