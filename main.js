@@ -28,10 +28,12 @@ window.onload = function(){
         displayCard('add');
     }, false);
     
+/*
     const deleteBtn = document.querySelector('.delete_btn');
     deleteBtn.addEventListener('click', function(){
         
     }, false);
+*/
 
     const closeBtn = document.querySelector('.close_btn');
     closeBtn.addEventListener('click', function(){
