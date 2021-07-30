@@ -1,11 +1,20 @@
-  * {
-    box-sizing: border-box;
+/* reset.css */  
+  *{
+   padding: 0;
+   margin: 0;
+   box-sizing: border-box;
+   -moz-box-sizing: border-box;
+   -webkit-box-sizing: border-box;
   }
   
   body {
     background-color: #fafafa;
   }
-  
+  ol, ul {
+    list-style: none;
+  }
+
+/* style.css */  
   .container {
     width: 100%;
   }
@@ -81,6 +90,7 @@
   }
   
   .event_item, .add_item {
+    position: relative;
     margin: 18px 0;
     padding: 5px;
   }
@@ -167,20 +177,27 @@
   }
 
   .menuBox{
-    float: right;
+    position: absolute;
+    top: 35px;
+    right: -10px;
   }
 
   .menuBox ul{
-    list-style:none;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    border-radius: 10px;
+    background: beige;
   }
 
   .menuBox ul li{
-    padding: 5px 10px 5px 10px;
     float: left;
+    padding: 10px 15px;
+    text-align: center;
+    cursor: pointer;
   }
 
   .menuBox ul li i{
-    cursor: pointer;
   }
 
   .arrow-up {
