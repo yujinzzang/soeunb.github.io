@@ -85,11 +85,11 @@ window.onload = function(){
     function gridTimeLine(type, info){
         let menuHtml = '';
         menuHtml += '<div class="menuBox">';
+        menuHtml += '   <div class="arrow-up"></div>';
         menuHtml += '    <ul>';
         menuHtml += '        <li><i class="far fa-edit edit_btn"></i></li>';
         menuHtml += '        <li><i class="far fa-trash-alt delete_btn"></i></li>';
         menuHtml += '    </ul>';
-        menuHtml += '   <div class="arrow-up"></div>';
         menuHtml += '</div>';
 
         if(type === 'add'){
